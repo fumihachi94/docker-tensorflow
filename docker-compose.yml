@@ -1,0 +1,20 @@
+version: '3'
+services:
+  tensorflow:
+    restart: always
+    build:
+      context: .
+      args: 
+        - LOCALUID=${LOCALUID}
+        - LOCALGID=${LOCALGID}
+        - USER=${USER}
+    container_name: 'tensorflow_jupyter'
+    working_dir: '/tf'
+    tty: true
+    ports:
+        - 8888:8888
+    volumes:
+        - ./src:/tf/src
+    env_file:
+        - ./.env
+    
